@@ -1,72 +1,9 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Skikda i-Tech</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="vendors/linericon/style.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-    <link rel="stylesheet" href="vendors/animate-css/animate.css">
-    <!-- main css -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <!--================ Start Header Menu Area =================-->
-    <header class="header_area">
-		<div class="header-top">
-			<div class="container">
-				<div class="row align-items-center">
-				</div>
-			</div>
-		</div>
-
-		<div class="main_menu">
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
 
 
-			<nav class="navbar navbar-expand-lg navbar-light" >
-				<div class="container">
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<a class="navbar-brand logo_h" href="index.html"><img src="img/" alt=""></a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Collect the nav links, forms, and other content for toggling -->
-					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item"><a class="nav-link" href="index.html">Accueille</a></li>
-							<li class="nav-item"><a class="nav-link" href="formations.html">Formations</a></li>
-							<li class="nav-item submenu dropdown active">
-								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-								 aria-expanded="false">Consulter</a>
-								<ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="evenements.html">Evenements</a></li>
-									<li class="nav-item active"><a class="nav-link" href="projets.html">Projets</a></li>
-								</ul>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#">Echange D'idée</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Chat</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Q&A</a></li>
-							<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
-							<li class="nav-item"><a class="nav-link" href="#"><i class="lnr lnr-user"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
-    <!--================ End Header Menu Area =================-->
+   
 
     <!--================Home Banner Area =================-->
     <section class="banner_area">
@@ -93,6 +30,7 @@
     <!--================End Home Banner Area =================-->
 
     <!--================Blog Categorie Area =================-->
+    <!--
     <section class="blog_categorie_area">
         <div class="container">
             <div class="row">
@@ -140,7 +78,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--================Blog Categorie Area =================-->
 
     <!--================Blog Area =================-->
@@ -149,187 +87,60 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="blog_left_sidebar">
+                    {% for post in queryset%}
                         <article class="row blog_item">
                             <div class="col-md-3">
                                 <div class="blog_info text-right">
                                     <div class="post_tag">
-                                        <a href="#">Tag1,</a>
-                                        <a class="active" href="#">Tag,</a>
-                                        <a href="#">Tag,</a>
-                                        <a href="#">Tag</a>
+                                    {% for cat in Post.categories.all%}
+                                        <a href="#">{{cat}}</a>
+                                        {% endfor %}
                                     </div>
                                     <ul class="blog_meta list">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                        <li><a href="#">{{post.author}}<i class="lnr lnr-user"></i></a></li>
+                                        <li><a href="#">{{post.timestamp |timesince}} Ago<i class="lnr lnr-calendar-full"></i></a></li>
+                                        <li><a href="#">{{post.view_count}}<i class="lnr lnr-eye"></i></a></li>
+                                        <li><a href="#">{{post.comment_count}}<i class="lnr lnr-bubble"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-md-9">
                                 <div class="blog_post">
-                                    <img src="img/blog/main-blog/m-blog-1.jpg" alt="">
+                                    <img src="{{post.thumbnail.url}}" alt="">
                                     <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Le Projet 1</h2>
+                                        <a href="{{post.get_absolute_url}}">
+                                            <h2>{{post.title}}</h2>
                                         </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
+                                        <p>{{post.content}}</p>
+                                        <a href="{{post.get_absolute_url}}" class="blog_btn">View More</a>
                                     </div>
                                 </div>
                             </div>
                         </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a class="active" href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/blog/main-blog/m-blog-2.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Projet 2</h2>
-                                        </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a class="active" href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/blog/main-blog/m-blog-2.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Projet 2</h2>
-                                        </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a class="active" href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/blog/main-blog/m-blog-1.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Projet 2</h2>
-                                        </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="row blog_item">
-                            <div class="col-md-3">
-                                <div class="blog_info text-right">
-                                    <div class="post_tag">
-                                        <a href="#">Food,</a>
-                                        <a class="active" href="#">Technology,</a>
-                                        <a href="#">Politics,</a>
-                                        <a href="#">Lifestyle</a>
-                                    </div>
-                                    <ul class="blog_meta list">
-                                        <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                        <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                        <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="blog_post">
-                                    <img src="img/blog/main-blog/m-blog-5.jpg" alt="">
-                                    <div class="blog_details">
-                                        <a href="single-blog.html">
-                                            <h2>Projet 2</h2>
-                                        </a>
-                                        <p>MCSE boot camps have its supporters and its detractors. Some people do not
-                                            understand why you should have to spend money on boot camp when you can get
-                                            the MCSE study materials yourself at a fraction.</p>
-                                        <a href="single-blog.html" class="blog_btn">View More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
+                        {% endfor %}
+
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
+                            {% if queryset.has_previous%}
                                 <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
+                                    <a href="?{{page_req_var}}={{queryset.previous_page_number}}" class="page-link" aria-label="Previous">
                                         <span aria-hidden="true">
                                             <span class="lnr lnr-chevron-left"></span>
                                         </span>
                                     </a>
                                 </li>
-                                <li class="page-item"><a href="#" class="page-link">01</a></li>
-                                <li class="page-item active"><a href="#" class="page-link">02</a></li>
-                                <li class="page-item"><a href="#" class="page-link">03</a></li>
-                                <li class="page-item"><a href="#" class="page-link">04</a></li>
-                                <li class="page-item"><a href="#" class="page-link">09</a></li>
+                                {% endif %}
+
+                                <li class="page-item active"><a href="?{{page_req_var}}={{queryset.number}}" class="page-link">{{queryset.number}}</a></li>
+                                {% if queryset.has_next%}
                                 <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
+                                    <a href="?{{page_req_var}}={{queryset.next_page_number}}" class="page-link" aria-label="Next">
                                         <span aria-hidden="true">
                                             <span class="lnr lnr-chevron-right"></span>
                                         </span>
                                     </a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </nav>
                     </div>
@@ -362,42 +173,19 @@
                         </aside>-->
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Les Projets Pupulaires</h3>
+                            {% for prj in most_recent%}
                             <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post">
+                            
+                                <img src="" alt="post">
                                 <div class="media-body">
                                     <a href="blog-details.html">
-                                        <h3>Space The Final Frontier</h3>
+                                        <h3>{{prj.title}}</h3>
                                     </a>
-                                    <p>02 Hours ago</p>
+                                    <p>{{prj.timestamp|timesince}}</p>
                                 </div>
+                                
                             </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post2.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post3.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="img/blog/popular-post/post4.jpg" alt="post">
-                                <div class="media-body">
-                                    <a href="blog-details.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
+                            {% endfor %}
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget ads_widget">
@@ -410,64 +198,19 @@
                             <h4 class="widget_title">Les Catégories des Projets</h4>
                             <ul class="list cat-list">
                                 <li>
+                                {% for cat in Post.categories.all%}
                                     <a href="#" class="d-flex justify-content-between">
-                                        <p>Informatique</p>
-                                        <p>37</p>
+                                        <p>{{cat.categories__title}}</p>
+                                        <p>{{cat.categories__title__count}}</p>
                                     </a>
+                                    {% endfor %}
                                 </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Gestion</p>
-                                        <p>24</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Mathematique</p>
-                                        <p>59</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Sciense Technologie</p>
-                                        <p>29</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Biologie</p>
-                                        <p>15</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p>Sciense Matier</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex justify-content-between">
-                                        <p></p>
-                                        <p>44</p>
-                                    </a>
-                                </li>
+                                
                             </ul>
                             <div class="br"></div>
                         </aside>
                         
-                        <aside class="single-sidebar-widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Architecture</a></li>
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Food</a></li>
-                                <li><a href="#">Technology</a></li>
-                                <li><a href="#">Lifestyle</a></li>
-                                <li><a href="#">Art</a></li>
-                            </ul>
-                        </aside>
+                        
                     </div>
                 </div>
             </div>
@@ -475,39 +218,5 @@
     </section>
     <!--================Blog Area =================-->
 
-    <!--================ Start footer Area  =================-->
-    <footer class="footer-area section_gap">
-		<div class="container">
-			
-			<div class="row footer-bottom d-flex justify-content-between" style="padding: 0px 0px 0px 0px;">
-				
-				<div class="col-lg-12 col-sm-12 footer-social">
-					<a href="#"><i class="fa fa-facebook"></i></a>
-					<a href="#"><i class="fa fa-twitter"></i></a>
-					<a href="#"><i class="fa fa-youtube"></i></a>
-					<a href="#"><i class="fa fa-instagram"></i></a>
-				</div>
-			</div>
-		</div>
-	</footer>
-    <!--================ End footer Area  =================-->
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/stellar.js"></script>
-    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-    <script src="js/owl-carousel-thumb.min.js"></script>
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="vendors/counter-up/jquery.counterup.js"></script>
-    <script src="js/mail-script.js"></script>
-    <!--gmaps Js-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-    <script src="js/gmaps.min.js"></script>
-    <script src="js/theme.js"></script>
-</body>
-
-</html>
+   {% endblock %}
+ 
