@@ -92,7 +92,7 @@
                                 <div class="detials">
                                     <p>Next Post</p>
                                     <a href="{{post.next_post.get_absolute_url}}">
-                                        <h4>{{post.previous_post.title}}</h4>
+                                        <h4>{{post.next_post.title}}</h4>
                                     </a>
                                 </div>
                                 <div class="arrow">
@@ -159,25 +159,23 @@
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget author_widget">
-                            <img class="author_img rounded-circle" src="img/blog/author.png" alt="">
-                            <h4>Charlie Barber</h4>
-                            <p>Senior blog writer</p>
+                            <img class="author_img rounded-circle" height="200" width="200" src="{{post.author.picture.url}}" alt="">
+                            <h4>{{post.author.user.username}}</h4>
+                            <p>r</p>
                             <div class="social_icon">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-github"></i></a>
                                 <a href="#"><i class="fa fa-behance"></i></a>
                             </div>
-                            <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you
-                                should have to spend money on boot camp when you can get. Boot camps have itssuppor
-                                ters andits detractors.</p>
+                            <p>{{post.overview}}</p>
                             <div class="br"></div>
                         </aside>
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Popular Posts</h3>
                             {% for post in most_recent%}
                             <div class="media post_item">
-                                <img src="img/blog/popular-post/post1.jpg" alt="post">
+                                <img src="{{post.thumbnail.url}}" height="100" width="100" alt="post">
                                 <div class="media-body">
                                     <a href="blog-details.html">
                                         <h3>{{post.title}}</h3>
@@ -196,7 +194,7 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Post Catgories</h4>
                             <ul class="list cat-list">
-                            {% for cat in post.categories.all%}
+                            {% for cat in ps.categories.all%}
                                 <li>
                                     <a href="#" class="d-flex justify-content-between">
                                         <p>{{cat.categories__title}}</p>
@@ -207,15 +205,7 @@
                             </ul>
                             <div class="br"></div>
                         </aside>
-                        <aside class="single-sidebar-widget newsletter_widget">
-                            <h4 class="widget_title">Newsletter</h4>
-                            <p>
-                                Here, I focus on a range of items and features that we use in life without
-                                giving them a second thought.
-                            </p>
-
-                            <div class="br"></div>
-                        </aside>
+                        
                         
                     </div>
                 </div>

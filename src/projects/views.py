@@ -36,6 +36,7 @@ def project_detail(request,id):
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     post = get_object_or_404(Post,id=id)
+    ps = Post.objects.all()
     form = CommentForm(request.POST or None)
     if request.method =='POST':
         form.instance.user = request.user
@@ -46,6 +47,7 @@ def project_detail(request,id):
         }))
 
     context = {
+        'ps':ps,
         'form':form,
         'most_recent':most_recent,
         'post':post,

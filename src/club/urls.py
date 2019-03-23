@@ -13,7 +13,7 @@ urlpatterns = [
     path ('formations/',formations),
     path ('evenements/',evenements),
     path ('projets/',projets,name="project"),
-    path ('project_detail<id>',project_detail,name="project-detail"),
+    path ('project_detail/<id>/',project_detail,name="project-detail"),
     path('tinymce/', include('tinymce.urls')),
     
 ]
