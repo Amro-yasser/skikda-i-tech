@@ -38,6 +38,15 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse("project-detail", kwargs={"id": self.id})
 
+    def get_create(self):
+        return reverse("create_post", kwargs={"id": self.id})
+
+    def get_update(self):
+        return reverse("update_post", kwargs={"id": self.id})
+
+    def get_delete(self):
+        return reverse("delete_post", kwargs={"id": self.id})
+
     @property
     def get_comments(self):
         return self.comments.all().order_by('-timestamp')

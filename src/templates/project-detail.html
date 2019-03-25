@@ -57,6 +57,11 @@
                                     <li><a href="#"><i class="fa fa-github"></i></a></li>
                                     <li><a href="#"><i class="fa fa-behance"></i></a></li>
                                 </ul>
+                                <div>
+                                <a href="{% url 'update_post' id=post.id %}" style="font-weight:700;color:black">Update </a>
+                                <a href="{% url 'delete_post' id=post.id %}" style="font-weight:700;margin-left:3px;color:red">Delete</a>
+
+                            </div>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9 blog_details">
@@ -107,25 +112,23 @@
                     </div>
             {% if request.user.is_authenticated%}
                     <div class="comments-area">
-                        <h4>{{post.comment.count}} Comments</h4>
+                        <h4>({{post.comments.count}}) Comments</h4>
                         {% for comment in post.get_comments%}
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="{{comment.author.picture.url}}" alt="">
+                                        <img src="{{comment.user.picture.url}}" height="50" width="50" alt="">
                                     </div>
                                     <div class="desc">
-                                        <h5><a href="#">{{comment.author.user.username}}</a></h5>
+                                        <h5><a href="#">{{comment.user.username}}</a></h5>
                                         <p class="date">{{comment.timestamp|timesince}}</p>
                                         <p class="comment">
                                             {{comment.content}}
                                         </p>
                                     </div>
                                 </div>
-                                <div class="reply-btn">
-                                    <a href="" class="btn-reply text-uppercase">reply</a>
-                                </div>
+                                
                             </div>
                         </div>
                         {% endfor%}

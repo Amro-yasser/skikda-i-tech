@@ -33,14 +33,19 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'projects',
     'evenements',
-    'formations',
     'tinymce',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'crispy_forms',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +60,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'club.urls'
 
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -70,6 +79,16 @@ TEMPLATES = [
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+)
 
 WSGI_APPLICATION = 'club.wsgi.application'
 
@@ -117,7 +136,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+CRISPY_TEMPLATE_PACK ='bootstrap4'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -129,9 +148,18 @@ STATIC_ROOT = os.path.join(VENV_PATH,'static_root')
 MEDIA_ROOT = os.path.join(VENV_PATH,'media_root')
 
 
+
+SITE_ID = 1
+#allauth config
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+
 TINYMCE_DEFAULT_CONFIG = {
-    'height': 360,
-    'width': 1120,
+
     'cleanup_on_startup': True,
     'custom_undo_redo_levels': 20,
     'selector': 'textarea',
