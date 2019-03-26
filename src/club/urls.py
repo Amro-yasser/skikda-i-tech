@@ -10,7 +10,7 @@ from projects.views import projets,project_detail,create_post,update_post,delete
 urlpatterns = [
     path('admin/', admin.site.urls),
     path ('',index),
-    path ('events_details/',events_details,name="events_details"),
+    path ('events_details/<id>',events_details,name="events_details"),
     path ('evenements/',evenements,name="events"),
     path ('projets/',projets,name="project"),
     path ('project_detail/<id>/',project_detail,name="project-detail"),
@@ -20,6 +20,7 @@ urlpatterns = [
     
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
+    
     
 ]
 

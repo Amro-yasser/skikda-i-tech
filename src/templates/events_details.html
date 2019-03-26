@@ -38,48 +38,12 @@
                     <div class="content_wrapper">
                         <h4 class="title">Description</h4>
                         <div class="content">
-                            When you enter into any new area of science, you almost always find yourself with a
-                            baffling new language of
-                            technical terms to learn before you can converse with the experts. This is certainly
-                            true in astronomy both in
-                            terms of terms that refer to the cosmos and terms that describe the tools of the trade,
-                            the most prevalent
-                            being the telescope.
-                            <br>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex ea
-                            commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum. Lorem ipsum dolor sit
-                            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim
-                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum.
+                            {{event.description}}
                         </div>
 
                         <h4 class="title">Les Chapitres </h4>
                         <div class="content">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
-                            <br>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore
-                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-                            ut aliquip ex ea
-                            commodoconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                            cillum. Lorem ipsum dolor sit
-                            amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore magna aliqua. Ut enim
-                            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat. Duis aute
-                            irure dolor in reprehenderit in voluptate velit esse cillum.
+                            {{event.content}}
                         </div>
 
                         
@@ -93,25 +57,25 @@
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Titre D'evenement</p>
-                                <span class="or">Inspire Yourself</span>
+                                <span class="or">{{event.title}}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Date: </p>
-                                <span>jj/mm/yyyy</span>
+                                <span>{{event.date|date}}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Les place valables </p>
-                                <span>200</span>
+                                <span>{{event.places_avalaible}}</span>
                             </a>
                         </li>
                         <li>
                             <a class="justify-content-between d-flex" href="#">
                                 <p>Heures: </p>
-                                <span>2.00 pm - 4.00 pm</span>
+                                <span>{{event.date.time}}</span>
                             </a>
                         </li>
                     </ul>
@@ -121,69 +85,29 @@
                     <div class="content">
                         
                         <div class="comments-area mb-30">
-                                
+                            {% for mod in event.moderators.all%}
                             <div class="comment-list">
                                 <div class="single-comment single-reviews justify-content-between d-flex">
                                     
                                     <div class="user justify-content-between d-flex">
                                         
                                         <div class="thumb">
-                                            <img src=" {% static 'img/blog/c1.jpg'%}" alt="">
+                                            <img src=" {{mod.user.picture.url}}" alt="">
                                         </div>
                                         <div>
                                             
                                         </div>
                                         <div class="desc">
-                                            <h5><a href="#">Emilly Blunt</a>
+                                            <h5><a href="#">{{mod.user}}</a>
                                                 <div class="star">
                                                 </div>
                                             </h5>
-                                            <p class="comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore.
-                                            </p>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment-list">
-                                <div class="single-comment single-reviews justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <img src="{% static 'img/blog/c2.jpg '%}" alt="">
-                                        </div>
-                                        <div class="desc">
-                                            <h5><a href="#">Elsie Cunningham</a>
-                                                <div class="star">
-                                                </div>
-                                            </h5>
-                                            <p class="comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="comment-list">
-                                <div class="single-comment single-reviews justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <img src=" {% static 'img/blog/c3.jpg'%}" alt="">
-                                        </div>
-                                        <div class="desc">
-                                            <h5><a href="#">Maria Luna</a>
-                                                <div class="star">
-                                                </div>
-                                            </h5>
-                                            <p class="comment">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                                eiusmod tempor incididunt ut labore et dolore.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
