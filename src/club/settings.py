@@ -94,7 +94,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 WSGI_APPLICATION = 'club.wsgi.application'
-
+LOGIN_REDIRECT_URL ='/'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
@@ -159,7 +159,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
 TINYMCE_DEFAULT_CONFIG = {
 
