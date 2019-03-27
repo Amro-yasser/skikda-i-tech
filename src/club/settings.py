@@ -40,13 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects',
     'evenements',
+    'profiles',
     'tinymce',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'crispy_forms',
     'django_filters',
-    
+    'rest_framework',
+    'markdown'
 ]
 
 MIDDLEWARE = [
@@ -148,7 +150,7 @@ VENV_PATH = os.path.dirname(BASE_DIR)
 STATIC_ROOT = os.path.join(VENV_PATH,'static_root')
 MEDIA_ROOT = os.path.join(VENV_PATH,'media_root')
 
-
+#ACCOUNT_SIGNUP_FORM_CLASS = 'evenements.forms.SignupForm'
 
 SITE_ID = 1
 #allauth config

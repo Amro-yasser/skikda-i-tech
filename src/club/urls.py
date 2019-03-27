@@ -20,7 +20,7 @@ urlpatterns = [
     
     path('tinymce/', include('tinymce.urls')),
     path('accounts/', include('allauth.urls')),
-    
+    path('api-auth/', include('rest_framework.urls'))
     
 ]
 

@@ -43,7 +43,7 @@
 
                         <h4 class="title">Les Chapitres </h4>
                         <div class="content">
-                            {{event.content}}
+                            {{event.chapitre}}
                         </div>
 
                         
@@ -92,18 +92,20 @@
                                     <div class="user justify-content-between d-flex">
                                         
                                         <div class="thumb">
-                                            <img src=" {{mod.user.picture.url}}" alt="">
+                                            <img height="50" width="50" src=" {{mod.picture.url}}" alt="">
                                         </div>
                                         <div>
                                             
                                         </div>
+                                        
                                         <div class="desc">
-                                            <h5><a href="#">{{mod.user}}</a>
+                                            <h5><a href="#">{{mod.user.username}}</a>
                                                 <div class="star">
                                                 </div>
                                             </h5>
                                             
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
